@@ -1,6 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:foodrecipe/app/app_colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodrecipe/core/resources/app_colors.dart';
+import 'package:foodrecipe/data/repository/recipe_repository_impl.dart';
+import 'package:foodrecipe/presentation/bloc/view_recipe_bloc/view_recipe_bloc.dart';
+import 'package:foodrecipe/presentation/bloc/view_recipe_bloc/view_recipe_state.dart';
 import 'package:foodrecipe/presentation/pages/view_recipe_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,7 +22,12 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 3),
       () => Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (BuildContext context) => const ViewRecipePage(),
+          builder: (BuildContext context) => BlocProvider(
+            create: (context) => ViewRecipeBloc(
+              RecipeRepositoryImpl(),
+            ),
+            child: ViewRecipePage(),
+          ),
         ),
       ),
     );

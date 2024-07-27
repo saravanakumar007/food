@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:foodrecipe/app/app_colors.dart';
+import 'package:foodrecipe/core/resources/app_colors.dart';
 import 'package:foodrecipe/data/models/recipe_model.dart';
-import 'package:foodrecipe/presentation/pages/add_recipe_page.dart';
+import 'package:foodrecipe/presentation/pages/add_or_edit_recipe_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 var defaultData = [
