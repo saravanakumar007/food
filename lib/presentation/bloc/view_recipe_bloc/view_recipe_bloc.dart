@@ -10,7 +10,8 @@ class ViewRecipeBloc extends Cubit<ViewRecipeState> {
 
   Future<void> fetchRecipes(
       List<dynamic> filterByCategories, String searchText) async {
-    final List<RecipeModel> recipes = await recipeRepository.getRecipes();
+    final List<RecipeModel> recipes =
+        await recipeRepository.getRecipesDataFromLocal();
     applyFilter(recipes, filterByCategories, searchText);
   }
 

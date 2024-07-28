@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class RecipeRepositoryImpl implements RecipeRepository {
   @override
-  Future<List<RecipeModel>> getRecipes() async {
+  Future<List<RecipeModel>> getRecipesDataFromLocal() async {
     final SharedPreferences sharedPref = await SharedPreferences.getInstance();
     final bool? setDefaultData = sharedPref.getBool('set_recipe_default_data');
     if (!(setDefaultData ?? false)) {
@@ -21,5 +21,16 @@ class RecipeRepositoryImpl implements RecipeRepository {
     final List<dynamic> jsonRecipeData =
         jsonDecode((localRecipeData ?? '').isEmpty ? '[]' : localRecipeData!);
     return jsonRecipeData.map((e) => RecipeModel.fromJson(e)).toList();
+  }
+
+  @override
+  Future<List<List<dynamic>>> getRecipesAndJsonDataFromLocal() async {
+    final SharedPreferences sharedPref = await SharedPreferences.getInstance();
+    final String? localRecipeData = sharedPref.getString('recipe_data');
+    final List<dynamic> jsonRecipeData =
+        jsonDecode((localRecipeData ?? '').isEmpty ? '[]' : localRecipeData!);
+    final List<RecipeModel> recipeItems =
+        jsonRecipeData.map((e) => RecipeModel.fromJson(e)).toList();
+    return [recipeItems, jsonRecipeData];
   }
 }

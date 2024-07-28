@@ -5,16 +5,19 @@ import 'package:foodrecipe/data/models/recipe_model.dart';
 
 class ActionButton {
   ActionButton({
+    this.key,
     required this.text,
     this.onPressed,
     this.isPrimaryButton = true,
   });
+  final Key? key;
   final String text;
   final bool isPrimaryButton;
   final Function()? onPressed;
 
   Widget getWidget() {
     return TextButton(
+      key: key,
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         backgroundColor:
@@ -118,6 +121,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                           (index) => StatefulBuilder(
                             builder: (context, checkboxState) =>
                                 CheckboxListTile(
+                              key: ValueKey(
+                                CommonCheckboxData.checkboxCategories[index]
+                                        ['name']
+                                    .toString()
+                                    .toLowerCase()
+                                    .replaceAll(' ', '_'),
+                              ),
                               activeColor: AppColors.kPrimaryColor,
                               value: CommonCheckboxData
                                   .checkboxCategories[index]['selected'],
@@ -150,6 +160,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ActionButton(
+                      key: const ValueKey('cancel_button'),
                       text: 'Cancel',
                       onPressed: () {
                         for (int i = 0;
@@ -163,6 +174,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                     ).getWidget(),
                     const SizedBox(width: 20),
                     ActionButton(
+                      key: const ValueKey('ok_button'),
                       text: 'Ok',
                       onPressed: () {
                         for (int i = 0;

@@ -71,6 +71,7 @@ class _ViewRecipePageState extends State<ViewRecipePage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          key: const ValueKey('add_button'),
           backgroundColor: AppColors.kPrimaryColor,
           child: const Icon(Icons.add),
           onPressed: () {
@@ -91,6 +92,7 @@ class _ViewRecipePageState extends State<ViewRecipePage> {
           centerTitle: false,
           actions: [
             PopupMenuButton(
+                key: const ValueKey('popup_menu'),
                 constraints: const BoxConstraints(maxWidth: 160),
                 onSelected: (index) {
                   if (index == 0) {
@@ -104,6 +106,7 @@ class _ViewRecipePageState extends State<ViewRecipePage> {
                 itemBuilder: (context) {
                   return [
                     PopupMenuItem(
+                      key: const ValueKey('remove_all'),
                       value: 0,
                       height: 0,
                       padding: const EdgeInsets.only(
@@ -165,6 +168,7 @@ class _ViewRecipePageState extends State<ViewRecipePage> {
                               ],
                             ),
                             child: TextField(
+                              key: const ValueKey('search_text'),
                               controller: searchTextEditingController,
                               cursorColor: AppColors.kPrimaryColor,
                               onChanged: (value) {
@@ -213,6 +217,12 @@ class _ViewRecipePageState extends State<ViewRecipePage> {
                         ...List.generate(
                           filterByCategories.length,
                           (index) => Row(
+                            key: ValueKey(
+                              filterByCategories[index]['name']
+                                  .toString()
+                                  .toLowerCase()
+                                  .replaceAll(' ', '_'),
+                            ),
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
@@ -342,6 +352,9 @@ class _ViewRecipePageState extends State<ViewRecipePage> {
                 });
               },
               child: RecipeItem(
+                key: ValueKey(
+                  recipeItems[index].title!.toLowerCase().replaceAll(' ', '_'),
+                ),
                 listKey: animatedListKey,
                 recipeItems: recipeItems,
                 recipeModel: recipeItems[index],

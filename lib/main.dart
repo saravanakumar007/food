@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodrecipe/presentation/pages/splash_screen.dart';
+import 'package:foodrecipe/presentation/pages/splash_page.dart';
 
 void main() {
   runApp(const RecipeApp());
@@ -16,7 +16,7 @@ class RecipeApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      home: const SplashPage(),
     );
   }
 }

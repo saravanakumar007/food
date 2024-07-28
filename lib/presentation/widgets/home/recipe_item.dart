@@ -121,6 +121,7 @@ class RecipeItem extends StatelessWidget {
               ),
             ),
             PopupMenuButton(
+                key: const ValueKey('current_recipe_popup_menu_button'),
                 constraints: const BoxConstraints(maxWidth: 125),
                 onSelected: (index) {
                   if (index == 0) {
@@ -146,6 +147,7 @@ class RecipeItem extends StatelessWidget {
                 itemBuilder: (context) {
                   return [
                     PopupMenuItem(
+                      key: const ValueKey('edit_recipe'),
                       value: 0,
                       height: 0,
                       padding: const EdgeInsets.only(
@@ -163,6 +165,7 @@ class RecipeItem extends StatelessWidget {
                       ),
                     ),
                     PopupMenuItem(
+                      key: const ValueKey('delete_recipe'),
                       value: 1,
                       height: 0,
                       padding: const EdgeInsets.only(
